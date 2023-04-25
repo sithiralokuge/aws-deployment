@@ -18,17 +18,14 @@ Route::get('/games', 'GamesController@index');
 
 Route::get('/games/create', 'GamesController@create');
 
-Route::get('/games/{game}', 'GamesController@show');
+use Illuminate\Support\Facades\Auth;
 
-Route::post('/games', 'GamesController@store');
+use App\Http\Controllers\CreateAccountController;
 
-Route::post('/games/{game}/reviews', 'ReviewsController@store');
+Route::get('account', [CreateAccountController::class, 'index'])->name('account');
+Route::post('account', [CreateAccountController::class, 'store']);
 
-Route::get('/register', 'RegistrationController@create');
-Route::post('/register', 'RegistrationController@store');
-
-Route::get('/login', 'SessionsController@create');
-Route::post('/login', 'SessionsController@store');
-Route::get('/logout', 'SessionsController@destroy');
-
+Route::get('/', function () {
+    return view('welcome');
+});
 
